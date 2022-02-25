@@ -8,9 +8,24 @@ public class Panel {
     private int row;
     private int column;
     private int installationYear;
+
+
+
     private Material material;
     private boolean tracking;
 
+    public  Panel(){
+
+    }
+    public Panel(int id, String section, int row, int column, int installationYear, Material material, boolean tracking) {
+        this.id = id;
+        this.section = section;
+        this.row = row;
+        this.column = column;
+        this.installationYear = installationYear;
+        this.material = material;
+        this.tracking = tracking;
+    }
     public int getId() {
         return id;
     }
