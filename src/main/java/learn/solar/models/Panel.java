@@ -8,9 +8,6 @@ public class Panel {
     private int row;
     private int column;
     private int installationYear;
-
-
-
     private Material material;
     private boolean tracking;
 
