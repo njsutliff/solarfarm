@@ -2,3 +2,4 @@ id,section,row,column,installationYear,material,tracking?
 1,test-section,1,1,2014,AMORPHOUS_SILICON,false
 2,test-section,1,1,2015,AMORPHOUS_SILICON,false
 3,test-section,1,1,2016,AMORPHOUS_SILICON,false
+4,test-section,1,1,2016,AMORPHOUS_SILICON,false

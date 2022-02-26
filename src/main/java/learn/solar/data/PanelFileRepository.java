@@ -13,13 +13,13 @@ public class PanelFileRepository {
     private final String filePath;
     private static final String HEADER = "id,section,row,column,installationYear,material,tracking?";
 
-
     public PanelFileRepository(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * finds all Panels in the data source (file),
+     *
      * @return List of all Panels in file
      */
     public List<Panel> findAll() throws DataException {
@@ -34,13 +34,13 @@ public class PanelFileRepository {
                     result.add(panel);
                 }
             }
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new DataException(ex.getMessage(), ex);
         }
 
         return result;
     }
+
     /**
      * finds all Panels in a section, uses the private findAll method
      * @param section to find Panels in
@@ -49,11 +49,11 @@ public class PanelFileRepository {
     public List<Panel> findBySection(String section) throws DataException {
         ArrayList<Panel> sectionList = new ArrayList<Panel>();
         List<Panel> panel = findAll();
-            for (Panel p : panel){
-                if (Objects.equals(p.getSection(), section)){
-                    sectionList.add(p);
-                }
+        for (Panel p : panel) {
+            if (Objects.equals(p.getSection(), section)) {
+                sectionList.add(p);
             }
+        }
 
         return sectionList;
     }
@@ -82,26 +82,45 @@ public class PanelFileRepository {
     }
 
     /**
-     *update a Panel
-     * @return Panel updated
+     * //TODO think about how to implement this with multiple fields to update once domain layer done
+     * update a Panel.
+     * not required to update Section, Row, or Column, but you must allow editing of other fields.
+     *
+     * @return true if panel found and updated.
      */
-    public boolean update(Panel p) {
-        return  false;
+    public boolean update(Panel p) throws DataException {
+        List<Panel> all = findAll();
+        for (int i = 0; i < all.size(); i++) {
+            if (p.getId() == all.get(i).getId()) { // found unique ID panel to update
+                all.set(i, p);
+                writeAll(all);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Delete a panel by Id
+     *
      * @param Id to delete panel
      * @return true if deleted else false
      */
-    public boolean deleteById(int Id) {
+    public boolean deleteById(int Id) throws DataException {
+        List<Panel> all = findAll();
+        for (Panel p : all) {
+            if (p.getId() == Id) {
+                all.remove(p);
+                writeAll(all);
+                return true;
+            }
+        }
         return false;
     }
 
-
-
     /**
      * Convert a Panel into a String in the file.
+     *
      * @return String of the Panel
      */
     private String serialize(Panel p) {
@@ -117,6 +136,7 @@ public class PanelFileRepository {
 
     /**
      * Convert a String into a Panel.
+     *
      * @return
      */
     private Panel deserialize(String s) {

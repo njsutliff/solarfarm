@@ -2,6 +2,7 @@ package learn.solar.data;
 
 import learn.solar.models.Material;
 import learn.solar.models.Panel;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +23,8 @@ class PanelFileRepositoryTest {
     PanelFileRepository panelRepository = new PanelFileRepository(TEST_FILE_PATH);
 
 
-    @BeforeEach
-    void setupTest() throws DataException {
+    @BeforeAll
+    static void setupTest() throws DataException {
         Path seedPath = Paths.get(SEED_FILE_PATH);
         Path testPath = Paths.get(TEST_FILE_PATH);
 
@@ -33,6 +34,9 @@ class PanelFileRepositoryTest {
             throw  new DataException(e.getMessage(),e);
         }
     }
+
+
+
     @Test
     void findBySection() throws DataException {
         List<Panel> p = panelRepository.findBySection("test-section");
