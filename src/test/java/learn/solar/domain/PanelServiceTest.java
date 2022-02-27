@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-
+//TODO custom equals() method for PanelService to allow more robust tests and not janky getMessage
 public class PanelServiceTest {
     PanelService service = new PanelService(new PanelRepositoryTestDouble());
 
