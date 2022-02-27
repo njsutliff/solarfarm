@@ -5,7 +5,7 @@ import learn.solar.models.Panel;
 import java.util.ArrayList;
 
 public class PanelResult {
-    private ArrayList<String> messages;
+    private ArrayList<String> messages = new ArrayList<>();
     private Panel panel;
     public ArrayList<String> getMessages() {
          return new ArrayList<>(messages);

@@ -49,17 +49,16 @@ public class PanelService {
 
     private PanelResult validate(Panel p) {
         PanelResult result = new PanelResult();
-
+        if(p== null){
+            result.addMessage("Panel cannot be null.");
+            return result;
+        }
         if (p.getSection().isBlank()) {
-            result.addMessage("Section name cannot be blank");
+            result.addMessage("Section name cannot be blank.");
             return result;
         }
         if (p.getId() <= 0 || p.getId() >= 250) {
             result.addMessage("ID invalid to place in solar panel array. ");
-            return result;
-        }
-        if (p.getSection().isBlank()) {
-            result.addMessage("Section cannot be blank");
             return result;
         }
         if (p.getRow() <= 0 || p.getRow() >= 250) {
@@ -79,7 +78,7 @@ public class PanelService {
                 || p.getMaterial() != Material.MONOCRYSTALINE_SILICON
                 || p.getMaterial() != Material.MULTICRYSTALLINE_SILICON
                 || p.getMaterial() == null) {
-            result.addMessage(String.format("Material must be one of the required materials, not ", p.getMaterial()));
+            result.addMessage(String.format("Material must be one of the required materials"));
             return result;
         }
         return result;
