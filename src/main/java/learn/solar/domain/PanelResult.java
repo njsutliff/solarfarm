@@ -26,7 +26,6 @@ public class PanelResult {
     public void addMessage(String message) {
         messages.add(message);
     }
-/* //TODO may need hashCode and equals for PanelResult
     @Override
     public int hashCode() {
         return super.hashCode();
@@ -36,6 +35,6 @@ public class PanelResult {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
-    */
+
 
 }

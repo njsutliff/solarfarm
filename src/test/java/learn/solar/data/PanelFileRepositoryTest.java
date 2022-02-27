@@ -54,15 +54,17 @@ class PanelFileRepositoryTest {
 
     @Test
     void update() throws DataException {
-        Panel oldPanel = new Panel(1,"test-section",1, 1,2013, Material.AMORPHOUS_SILICON,false);
-        panelRepository.add(oldPanel);
-        Panel newPanel = new Panel(1,"test-section",1, 1,2015, Material.AMORPHOUS_SILICON,false);
-        panelRepository.update(newPanel);
-        List<Panel> p = panelRepository.findBySection("test-section");
-        boolean test = p.get(0).equals(oldPanel); // should be false if update worked
-        assertEquals(test, false);
-    }
+        Panel panelToChange = new Panel(1,"test-section",2,1,2014,Material.AMORPHOUS_SILICON,false
+        );
 
+        assertTrue(panelRepository.update(panelToChange));
+        Panel actual = panelRepository.findBySection("test-section").get(0);
+        assertEquals(panelToChange, actual);
+    }
+    @Test
+    void updateIfFailed() throws DataException {
+
+    }
     @Test
     void deleteById() throws  DataException{
         List<Panel> panels = panelRepository.findAll();

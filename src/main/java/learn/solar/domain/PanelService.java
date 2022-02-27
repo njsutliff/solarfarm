@@ -32,19 +32,31 @@ public class PanelService {
 
     public PanelResult update(Panel p) throws DataException {
         PanelResult result = validate(p);
-        if (!repository.update(p)) {
-            result.addMessage(String.format("Failed to update Panel id row col: ", p.getId(), p.getRow(), p.getColumn()));
+        if(!result.isSuccess()){
+            return  result;
         }
-        return result;
+        if (!repository.update(p)) {
+            result.addMessage("Failed to update Panel id: " + p.getId());
+            return result;
+        }
+        if(result.isSuccess()){
+            result.setPanel(p);
+        }else {
+            String message = String.format("Panel id %s was not found.", p.getId());
+            result.addMessage(message);
+        }
+        return  result;
     }
 
     public PanelResult deleteById(int Id) throws DataException {
         PanelResult result = new PanelResult();
         if (!repository.deleteById(Id)) {
-            result.addMessage(String.format("Failed to delete panel with id", Id));
+            result.addMessage("Failed to delete panel with id"+ Id);
             return result;
+        }else {
+            repository.deleteById(Id);
         }
-        return result;
+         return result;
     }// general purpose validation
 
     private PanelResult validate(Panel p) {
@@ -73,11 +85,11 @@ public class PanelService {
             result.addMessage("Year cannot be in the future. ");
         }
         if (p.getMaterial() != Material.AMORPHOUS_SILICON
-                || p.getMaterial() != Material.CADMIUM_TELLURIDE
-                || p.getMaterial() != Material.COPPER_IRIDIUM_GALLIUM_SELENIDE
-                || p.getMaterial() != Material.MONOCRYSTALINE_SILICON
-                || p.getMaterial() != Material.MULTICRYSTALLINE_SILICON
-                || p.getMaterial() == null) {
+                && p.getMaterial() != Material.CADMIUM_TELLURIDE
+                && p.getMaterial() != Material.COPPER_IRIDIUM_GALLIUM_SELENIDE
+                && p.getMaterial() != Material.MONOCRYSTALINE_SILICON
+                && p.getMaterial() != Material.MULTICRYSTALLINE_SILICON
+                && p.getMaterial() == null) {
             result.addMessage(String.format("Material must be one of the required materials"));
             return result;
         }
