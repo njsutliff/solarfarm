@@ -2,10 +2,10 @@ package learn.solar.ui;
 
 public enum MenuOption {
     EXIT("Exit"),
-    FIND_BY_SECTION("Find by Section"),
-    ADD_PANEL("Add Panel"),
-    UPDATE_PANEL("Update Panel"),
-    REMOVE_PANEL("Remove Panel");
+    FIND_BY_SECTION("Find Panels by Section"),
+    ADD_PANEL("Add a Panel"),
+    UPDATE_PANEL("Update a Panel"),
+    REMOVE_PANEL("Remove a Panel");
 
     MenuOption(String title) {
         this.title = title;
