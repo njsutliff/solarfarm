@@ -13,73 +13,79 @@ import java.util.Scanner;
 public class View {
     private final Scanner console = new Scanner(System.in);
 
-    public  MenuOption viewMenu(){
-        MenuOption[] values =  MenuOption.values();
+    public MenuOption viewMenu() {
+        MenuOption[] values = MenuOption.values();
         printHeader("solarfarm menu: ");
-        for(int i = 0; i < values.length; i++){
+        for (int i = 0; i < values.length; i++) {
             System.out.printf("%s. %s%n", i, values[i].getTitle());
         }
-        int index = readInt("Select [ 0 - 4 ] ",0, 4);
-        return  values[index];
+        int index = readInt("Select [ 0 - 4 ] ", 0, 4);
+        return values[index];
 
     }
-    public void printHeader(String message){
-        System.out.println( );
+
+    public void printHeader(String message) {
+        System.out.println();
         System.out.println(message);
         System.out.println("=".repeat(message.length()));
     }
-    public void printResult(PanelResult result){
-        System.out.printf("%s",result.isSuccess(), result.getMessages());
+
+    public void printResult(PanelResult result) {
+        System.out.printf("%s", result.isSuccess(), result.getMessages());
     }
 
-    public  void viewPanels(List<Panel> list){
-        if(list.size() == 0){
+    public void viewPanels(List<Panel> list) {
+        if (list.size() == 0) {
             System.out.println("No Panels found");
         }
-        for(Panel p : list){
+        for (Panel p : list) {
             System.out.printf("%s%s %n %s%n %s%n %s%n %s%n %s %n",
                     "[Panel ID: " + p.getId(),
-                    " Section: " +p.getSection() + "]",
+                    " Section: " + p.getSection() + "]",
                     "Row: " + p.getRow(),
-                    "Column: " +p.getColumn(),
-                    "Installation Year: " +p.getInstallationYear(),
-                    "Material: " +p.getMaterial(),
-                    "Tracking?: " +p.isTracking());
+                    "Column: " + p.getColumn(),
+                    "Installation Year: " + p.getInstallationYear(),
+                    "Material: " + p.getMaterial(),
+                    "Tracking?: " + p.isTracking());
 
         }
     }
-    public String readSection(){
+
+    public String readSection() {
         System.out.println("Enter a section: ");
         return readString("");
     }
+
     public Panel makePanel() {
         printHeader("create a new Panel now: ");
         boolean done = false;
         Panel p;
 
-            System.out.println("Enter a panel ID#:  ");
-            int Id = readInt("");
-            System.out.println(Id);
+        System.out.println("Enter a panel ID#:  ");
+        int Id = readInt("");
+        System.out.println(Id);
 
-            String section = readSection();
+        String section = readSection();
 
-            int row = readInt("enter a row");
-            int col = readInt("enter a column");
-            int year = readInt("Enter an installation year");
-            Material[] values = Material.values();
-            printHeader("pick a material for the solar panel: ");
-            for (int i = 0; i < values.length; i++) {
-                System.out.printf("%s. %s%n", i, values[i]);
-            }
-            int index = readInt("Select [ 0 - 4 ] ", 0, 4);
-            Material material = values[index];
-            boolean b = Boolean.parseBoolean(readString("Is it tracking? true or false: "));
+        int row = readInt("enter a row");
+        int col = readInt("enter a column");
+        int year = readInt("Enter an installation year");
+        Material[] values = Material.values();
+        printHeader("pick a material for the solar panel: ");
+        for (int i = 0; i < values.length; i++) {
+            System.out.printf("%s. %s%n", i, values[i]);
+        }
+        int index = readInt("Select [ 0 - 4 ] ", 0, 4);
+        Material material = values[index];
+        boolean b = Boolean.parseBoolean(readString("Is it tracking? true or false: "));
 
-            p = new Panel(Id, section, row, col, year, material, b);
+        p = new Panel(Id, section, row, col, year, material, b);
         System.out.println(" Success! New panel created. ");
         return p;
     }
+    public Panel choosePanel(List<Panel> panels) {
 
+    }
 
     private String readString(String message) {
         System.out.println(message);
@@ -109,19 +115,19 @@ public class View {
             } catch (NumberFormatException n) {
                 n.printStackTrace();
             }
-        } while(!valid);
+        } while (!valid);
         return result;
     }
 
     private int readInt(String stringToParseToInt, int min, int max) {
 
         int result = 0;
-        do{
+        do {
             result = readInt(stringToParseToInt);
             if (result < min || result > max) {
                 System.out.printf("Value must be between %s and %s.%n", min, max);
             }
-        }while (result < min || result>max);
+        } while (result < min || result > max);
         return result;
     }
 

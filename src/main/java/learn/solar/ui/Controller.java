@@ -65,6 +65,7 @@ public class Controller {
     }
     private  void updatePanel() {
         view.printHeader(MenuOption.UPDATE_PANEL.getTitle());
+
     }
     private  void deletePanel() {
         view.printHeader(MenuOption.REMOVE_PANEL.getTitle());
