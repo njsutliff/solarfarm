@@ -62,7 +62,6 @@ public class Controller {
         view.printHeader(MenuOption.ADD_PANEL.getTitle());
         Panel p = view.makePanel();
         PanelResult result = service.add(p);
-        System.out.println(result.getMessages());
     }
     private  void updatePanel() {
         view.printHeader(MenuOption.UPDATE_PANEL.getTitle());

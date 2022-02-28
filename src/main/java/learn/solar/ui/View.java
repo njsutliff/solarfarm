@@ -76,7 +76,7 @@ public class View {
             boolean b = Boolean.parseBoolean(readString("Is it tracking? true or false: "));
 
             p = new Panel(Id, section, row, col, year, material, b);
-
+        System.out.println(" Success! New panel created. ");
         return p;
     }
 
